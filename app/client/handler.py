@@ -10,7 +10,8 @@ crypto = Crypto(env.get("KEY"))
 
 def get_encrypted_msg(msg):
   encrypted = crypto.encrypt(msg)
-  return codecs.decode(encrypted, "latin-1")
+  print(encrypted)
+  return codecs.decode(encrypted, "utf-8")
 
 def get_binary_msg(data):
   binary_msg = ''

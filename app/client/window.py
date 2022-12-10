@@ -58,10 +58,11 @@ class ClientWindow(QtWidgets.QWidget):
 
   @QtCore.Slot(str)
   def on_msg_changed(self, msg):
-    # encrypted = handler.get_encrypted_msg(msg)
-    self.encrypted_msg.setText(msg)
-    self.binary_msg.setText(handler.get_binary_msg(msg))
-    self.binary_msg_manchester.setText(handler.manchester_encode(msg))
+    encrypted = handler.get_encrypted_msg(msg)
+    self.encrypted_msg.setText(encrypted)
+    print(encrypted)
+    self.binary_msg.setText(handler.get_binary_msg(encrypted))
+    self.binary_msg_manchester.setText(handler.manchester_encode(encrypted))
     self.update_canvas()
 
   @QtCore.Slot()

@@ -1,4 +1,4 @@
-
+import re
 def manchester_encode(mensagem):
   binario = ""
   for x in mensagem:
@@ -8,9 +8,8 @@ def manchester_encode(mensagem):
   
   cont = 0
   for i in binario:
-    
     if(cont == 0):
-      if(binario == '0'):
+      if(i == '0'):
         toCompareBinary += '0'
         cont += 1
         toCompareBinary += '1'
@@ -36,11 +35,39 @@ def manchester_encode(mensagem):
   return toCompareBinary
 
 def manchester_decode(manchester):
+  print(manchester)
   decmanchester = ""
-  for num in range(1, len(manchester)):
-    if(num % 2):
-      decmanchester += manchester[num]
-  
+  twoBits = re.findall("..", manchester)
+  print(twoBits)
+  for x in range(len(twoBits)):
+    if x == 0:
+      if twoBits[x] == '00':
+        decmanchester+= '0'
+      if twoBits[x] == '01':
+        decmanchester+= '0'
+      if twoBits[x] == '10':
+        decmanchester+= '0'
+      if twoBits[x] == '11':
+        decmanchester+= '1'
+      continue  
+
+    if twoBits[x] == '00' and twoBits[x-1][1] == '0':
+      decmanchester+= '1'
+    if twoBits[x] == '00' and twoBits[x-1][1] == '1':
+      decmanchester+= '1'
+    if twoBits[x] == '01' and twoBits[x-1][1] == '0':
+      decmanchester+= '1'
+    if twoBits[x] == '01' and twoBits[x-1][1] == '1':
+      decmanchester+= '0'
+    if twoBits[x] == '10' and twoBits[x-1][1] == '0':
+      decmanchester+= '0'
+    if twoBits[x] == '10' and twoBits[x-1][1] == '1':
+      decmanchester+= '0'
+    if twoBits[x] == '11' and twoBits[x-1][1] == '0':
+      decmanchester+= '1'
+    if twoBits[x] == '11' and twoBits[x-1][1] == '1':
+      decmanchester+= '0'
+
   return decmanchester
     
 def bitstring_to_bytes(s):

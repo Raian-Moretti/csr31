@@ -31,7 +31,7 @@ class ClientWindow(QtWidgets.QWidget):
     flo.addRow('Mensagem:', self.msg)
     flo.addRow('Mensagem criptografada:', self.encrypted_msg)
     flo.addRow('Mensagem binária:', self.binary_msg)
-    flo.addRow('Mensagem binária com codificação Manchester:', self.binary_msg_manchester)
+    flo.addRow('Mensagem binária com codificação Manchester Diferencial:', self.binary_msg_manchester)
     flo.addWidget(NavigationToolbar(self.canvas, self))
     flo.addRow(self.canvas)
     flo.addRow(self.send_button)
@@ -60,9 +60,8 @@ class ClientWindow(QtWidgets.QWidget):
   def on_msg_changed(self, msg):
     encrypted = handler.get_encrypted_msg(msg)
     self.encrypted_msg.setText(encrypted)
-    print(encrypted)
     self.binary_msg.setText(handler.get_binary_msg(encrypted))
-    self.binary_msg_manchester.setText(handler.manchester_encode(encrypted))
+    self.binary_msg_manchester.setText(handler.diff_manchester_encode(encrypted))
     self.update_canvas()
 
   @QtCore.Slot()

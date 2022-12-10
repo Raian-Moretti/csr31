@@ -1,5 +1,5 @@
 import socket
-from lib.crypto import Crypto
+from lib.ceasar_encryption import CeasarEncryption
 from lib.env import get_env
 
 env = get_env()

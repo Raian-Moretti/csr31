@@ -1,5 +1,5 @@
 import re
-def manchester_encode(mensagem):
+def diff_manchester_encode(mensagem):
   binario = ""
   for x in mensagem:
     binario += '{0:08b}'.format(ord(x))
@@ -34,11 +34,9 @@ def manchester_encode(mensagem):
 
   return toCompareBinary
 
-def manchester_decode(manchester):
-  print(manchester)
+def diff_manchester_decode(manchester):
   decmanchester = ""
   twoBits = re.findall("..", manchester)
-  print(twoBits)
   for x in range(len(twoBits)):
     if x == 0:
       if twoBits[x] == '00':

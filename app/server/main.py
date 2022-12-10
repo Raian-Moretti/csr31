@@ -5,26 +5,25 @@ import sys
 from PySide6 import QtWidgets
 
 from lib.env import get_env
-from lib.crypto import Crypto
-from lib.manchester_code import manchester_decode, bitstring_to_bytes
+from lib.ceasar_encryption import CeasarEncryption
+from lib.diff_manchester_code import diff_manchester_decode, bitstring_to_bytes
 import server.window as window
 import server.server as server
 
-# TODO codificação de linha manchester
 env = get_env()
-crypto = Crypto(env.get("KEY"))
+ceasar = CeasarEncryption(env.get("KEY"))
 
 def parse_data(data):
   binary_msg_manchester = ''
   for c in data:
     binary_msg_manchester += '{0:08b}'.format(c)
   
-  binary_msg = manchester_decode(binary_msg_manchester)
+  binary_msg = diff_manchester_decode(binary_msg_manchester)
 
   decoded_data = bitstring_to_bytes(binary_msg)
   encrypted_msg = codecs.decode(decoded_data, 'latin-1')
 
-  msg = crypto.decrypt(encrypted_msg)
+  msg = ceasar.decrypt(encrypted_msg)
   msg = codecs.decode(msg, "latin-1")
 
   return {

@@ -1,19 +1,17 @@
-class Crypto:
+class CeasarEncryption:
   def __init__(self, key):
     self.key = key
 
-  # Ceasar cipher
   def encrypt(self, text):
-    b = bytes(text, "latin-1")
+    b = bytes(text, "utf-8")
     encrypted = []
     for byte in b:
       encrypted.append((byte + self.key) % 255)
     
     return bytes(encrypted)
 
-  # Ceasar cipher
   def decrypt(self, text):
-    b = bytes(text, "latin-1")
+    b = bytes(text, "utf-8")
     decrypted = []
     for byte in b:
       if (byte - self.key) < 0:

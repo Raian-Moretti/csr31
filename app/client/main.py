@@ -3,11 +3,11 @@ import sys
 from PySide6 import QtWidgets
 
 from lib.env import get_env
-from lib.crypto import Crypto
+from lib.ceasar_encryption import CeasarEncryption
 import client.window as window
 
 env = get_env()
-crypto = Crypto(env.get("KEY"))
+ceasar = CeasarEncryption(env.get("KEY"))
 
 def main():
   app = QtWidgets.QApplication(sys.argv)

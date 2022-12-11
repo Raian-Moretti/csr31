@@ -1,10 +1,7 @@
 import socket
 from lib.ceasar_encryption import CeasarEncryption
-from lib.env import get_env
-
-env = get_env()
 
 def send_msg(msg):
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect((env.get("HOST"), env.get("PORT")))
+    s.connect(("localhost", 30001))
     s.sendall(msg)

@@ -1,25 +1,21 @@
 import codecs
-
-from lib.env import get_env
 from lib.ceasar_encryption import CeasarEncryption
 import lib.diff_manchester_code as diff_manchester_code
 import client.client as client
-
-env = get_env()
-ceasar = CeasarEncryption(env.get("KEY"))
+ceasar = CeasarEncryption(5)
 
 def get_encrypted_msg(msg):
   encrypted = ceasar.encrypt(msg)
   return codecs.decode(encrypted, "utf-8")
 
-def get_binary_msg(data):
-  binary_msg = ''
+def get_bin_msg(data):
+  bin_msg = ''
   for byte in data:
-    binary_msg += '{0:08b}'.format(ord(byte))
-  return binary_msg
+    bin_msg += '{0:08b}'.format(ord(byte))
+  return bin_msg
 
 def send_msg(msg):
-  msg = diff_manchester_code.bitstring_to_bytes(msg)
+  msg = diff_manchester_code.string_to_byte(msg)
   client.send_msg(msg)
 
 def diff_manchester_encode(msg):
